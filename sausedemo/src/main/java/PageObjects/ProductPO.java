@@ -140,5 +140,35 @@ public class ProductPO {
 	}
 	
 	
+	public ActionStatus compareProductsPriceHighToLow(WebDriver webDriver) {
+		ActionStatus actionStatus = new ActionStatus();
+		this.initializeProductPO(webDriver);
+		
+		if(productList != null) {
+			for(int index = 1; index < productList.size(); index++) {
+				
+				Float currentProductPrice = Float.parseFloat(productList.get(index).getPrice());
+				Float nextProductPrice = Float.parseFloat(productList.get(index+1).getPrice());
+				
+				if(currentProductPrice < nextProductPrice) {
+					actionStatus.setActionStatus(false);
+					actionStatus.setActionResultMessage("Failure :: Price low for "+productList.get(index)+" from next product "+productList.get(index+1));
+					return actionStatus;
+				}
+			}
+
+			actionStatus.setActionStatus(true);
+			actionStatus.setActionResultMessage("Succes :: Products are in order of Price high to low");
+		
+		}else {
+			actionStatus.setActionStatus(false);
+			actionStatus.setActionResultMessage("Failure :: No Products found to compare price");
+		}
+		
+		
+		return actionStatus;
+		
+	}
+	
 	
 }

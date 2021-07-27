@@ -7,6 +7,19 @@ public class Product {
 	private String price;
 	private String cartStatus;
 	
+	public Product(String name, String description, String price, String cartStatus) {
+		this.setName(name);
+		this.setDescription(description);
+		this.setPrice(price);
+		this.setCartStatus(cartStatus);
+	}
+	public Product() {
+		this.setName("");
+		this.setDescription("");
+		this.setPrice("");
+		this.setCartStatus("");
+	
+	}
 	public String getName() {
 		return name;
 	}

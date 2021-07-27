@@ -18,11 +18,28 @@ public class CartPO {
 		private String priceSubXpath = "";
 		private String cartStatusSubXpath = "";
 	
-
+	private String goToCartXpath = "";
+		
 	List<Product> productList = new ArrayList<Product>();
 	
 	
 
+	public ActionStatus loadCart(WebDriver webDriver) {
+		ActionStatus actionStatus = new ActionStatus();
+		
+		WebElement cartButton = WebDriverUtil.findElementByXpath(webDriver, goToCartXpath);
+		if(cartButton == null) {
+			actionStatus.setActionResultMessage("Failure :: Cart button not found");
+			actionStatus.setActionStatus(false);
+			return actionStatus;
+		}
+		
+		return WebDriverUtil.clickWebElement(cartButton, "Cart Button");
+		
+	
+		
+	}
+	
 	public void initializeItemPO(WebDriver webDriver) {
 		
 		List<WebElement> productDivs = WebDriverUtil.findElementsByXpath(webDriver, productDivsXpath);
@@ -89,5 +106,10 @@ public class CartPO {
 		return actionStatus;
 		
 	}
+
+
+
+
+	
 	
 }
