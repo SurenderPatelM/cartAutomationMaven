@@ -16,7 +16,7 @@ public class WebDriverUtil {
 	
 	
 	
-	public ActionStatus clickWebElement(WebElement webElement, String identifer) {
+	public static ActionStatus clickWebElement(WebElement webElement, String identifer) {
 		ActionStatus actionStatus = new ActionStatus();
 		try {
 			webElement.clear();
@@ -31,7 +31,7 @@ public class WebDriverUtil {
 	}
 	
 	
-	public ActionStatus fillWebElement(WebElement webElement, String identifer, String value) {
+	public static ActionStatus fillWebElement(WebElement webElement, String identifer, String value) {
 		ActionStatus actionStatus = new ActionStatus();
 		try {
 			webElement.sendKeys(value);
@@ -46,7 +46,21 @@ public class WebDriverUtil {
 	}
 	
 	
-	public WebElement findElementByXpath(WebDriver webDriver, String xpathExpression) {
+	public static ActionStatus selectDropdown(WebElement filterDropDown,String identifer, String value) {
+		ActionStatus actionStatus = new ActionStatus();
+		try {
+			filterDropDown.sendKeys(value);
+			actionStatus.setActionStatus(true);
+			actionStatus.setActionResultMessage("Succes :: "+identifer+" filled with "+value);
+		}catch(Exception e) {
+			actionStatus.setActionStatus(false);
+			actionStatus.setActionResultMessage("Succes :: "+identifer+" not filled with "+value);
+			actionStatus.setActionException(e);
+		}
+		return actionStatus;
+	}
+	
+	public static WebElement findElementByXpath(WebDriver webDriver, String xpathExpression) {
 		try {
 			return webDriver.findElement(By.xpath(xpathExpression));
 		}catch(Exception e) {
@@ -56,7 +70,7 @@ public class WebDriverUtil {
 	}
 
 	
-	public List<WebElement> findElementsByXpath(WebDriver webDriver, String xpathExpression) {
+	public static List<WebElement> findElementsByXpath(WebDriver webDriver, String xpathExpression) {
 		try {
 			return webDriver.findElements(By.xpath(xpathExpression));
 		}catch(Exception e) {
@@ -66,7 +80,7 @@ public class WebDriverUtil {
 	}
 	
 	
-	public WebElement findSubElementByXpath(WebElement webElement, String xpathExpression) {
+	public static WebElement findSubElementByXpath(WebElement webElement, String xpathExpression) {
 		try {
 			return webElement.findElement(By.xpath(xpathExpression));
 		}catch(Exception e) {
@@ -76,7 +90,7 @@ public class WebDriverUtil {
 	}
 
 	
-	public List<WebElement> findSubElementsByXpath(WebElement webElement, String xpathExpression) {
+	public static List<WebElement> findSubElementsByXpath(WebElement webElement, String xpathExpression) {
 		try {
 			return webElement.findElements(By.xpath(xpathExpression));
 		}catch(Exception e) {
@@ -84,6 +98,10 @@ public class WebDriverUtil {
 		}
 		return null;
 	}
+
+
+
+	
 	
 	
 }
